@@ -1,8 +1,14 @@
 package com.beyond.hello.spring.boot.entity;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(schema ="wangzuo",name="tb_user")
 public class TbUser {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String name;
@@ -14,6 +20,15 @@ public class TbUser {
     private Date creatData;
 
     private Date updetaData;
+
+    public TbUser() {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.creatData = creatData;
+        this.updetaData = updetaData;
+    }
 
     public Integer getId() {
         return id;

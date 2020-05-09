@@ -223,4 +223,16 @@
       updeta_data = #{updetaData,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="selectUsers" resultMap="BaseResultMap">
+    select * from wangzuo.tb_user limit #{count} offset #{start}
+  </select>
+
+  <select id="selectCount">
+    select count(*) from wangzuo.tb_user
+  </select>
+
+
 </mapper>

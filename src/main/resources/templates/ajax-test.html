@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+
+    <title>ajax-test</title>
+</head>
+<body>
+
+<div id="div1"><h1>ajax test</h1></div>
+<br>
+<button>Get External Content</button>
+
+<!-- jaavscript的引用，要在javascript代码前，或者放在head中，否则相关代码不能执行-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("button").click(function(){
+            // if(typeof ($.ajax)==='function') {
+            //     alert("ajax is function");
+            // }
+
+            $.ajax({url: "demotest", type: "POST", success: function(result){
+                    $("#div1").html(result);
+                },
+                error: function(error){
+                    $("#div1").append('<div>had error</div>');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
