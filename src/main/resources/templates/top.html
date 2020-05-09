@@ -11,11 +11,15 @@
 </div>
 
 <div>
-    <a href="file-upload-status" >upload go</a>
+    <a th:href="ajax-test" >ajax go</a>
 </div>
 
 <div>
-    <a th:href="@{'http://localhost:8080/page-file/'}" th:text="一览"></a>
+    <a th:href="file-upload-status" >upload go</a>
+</div>
+
+<div>
+    <a th:href="@{'/page-file/'}" th:text="一览"></a>
 </div>
 
 </body>

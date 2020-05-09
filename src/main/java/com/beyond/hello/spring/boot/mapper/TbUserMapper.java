@@ -30,8 +30,4 @@ public interface TbUserMapper {
     int updateByPrimaryKeySelective(TbUser record);
 
     int updateByPrimaryKey(TbUser record);
-
-    List<TbUser> selectUsers(@Param("start") int start, @Param("count") int count);
-
-    int selectCount();
 }

@@ -6,6 +6,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class SpringConfig implements WebMvcConfigurer {
+
+    /*
+     * 不用通过Controller，画面端可以直接跳转的页面的配置
+     */
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");

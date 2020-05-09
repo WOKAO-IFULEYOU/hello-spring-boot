@@ -8,8 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/*
+ * 呼叫mybatis查询语句用
+ */
 @Repository
-public class UserResponseImpl {
+public class UserMybatisResponse {
     @Autowired
     private TbUserMapper tbUserMapper;
 
@@ -17,13 +20,6 @@ public class UserResponseImpl {
         TbUserExample tbUserExample = new TbUserExample();
         tbUserExample.createCriteria().andIdIn(userIds);
         List<TbUser> userList = tbUserMapper.selectByExample(tbUserExample);
-        return userList;
-    }
-
-    public List<TbUser> getPageUsers (int start, int count){
-//        int start = 2;
-//        int count = 12;
-        List<TbUser> userList = tbUserMapper.selectUsers(start, count);
         return userList;
     }
 }

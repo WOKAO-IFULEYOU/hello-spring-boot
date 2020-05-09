@@ -2,8 +2,8 @@ package com.beyond.hello.spring.boot.service;
 
 import com.beyond.hello.spring.boot.entity.TbUser;
 import com.beyond.hello.spring.boot.model.UserModel;
-import com.beyond.hello.spring.boot.response.UserResponse;
-import com.beyond.hello.spring.boot.response.UserResponseImpl;
+import com.beyond.hello.spring.boot.response.UserJpaResponse;
+import com.beyond.hello.spring.boot.response.UserMybatisResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,12 +18,15 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
     @Autowired
-    private UserResponse userResponse;
+    private UserJpaResponse userJpaResponse;
     @Autowired
-    private UserResponseImpl userResponseImpl;
+    private UserMybatisResponse userMybatisResponse;
 
+    /*
+     * mybatis查询接口用
+     */
     public List<UserModel> getUser (List<Integer> userIds){
-        List<TbUser> userList = userResponseImpl.getUser(userIds);
+        List<TbUser> userList = userMybatisResponse.getUser(userIds);
         List<UserModel> userModels = userList.stream()
                 .map(user ->
                     {
@@ -39,27 +42,15 @@ public class UserService {
         return userModels;
     }
 
-    public List<UserModel> getPageUsers (int start, int count) {
-        List<TbUser> pageUsers = userResponseImpl.getPageUsers(start, count);
-        List<UserModel> userModels = pageUsers.stream()
-                .map(pageUser ->
-                {
-                    UserModel userModel = new UserModel();
-                    BeanUtils.copyProperties(pageUser, userModel);
-                    String creatDate = new SimpleDateFormat("yyyy-MM-dd").format(pageUser.getCreatData());
-                    String updateDate = new SimpleDateFormat("yyyy-MM-dd").format(pageUser.getUpdetaData());
-                    userModel.setCreatData(creatDate);
-                    userModel.setUpdetaData(updateDate);
-                    return userModel;
-                })
-                .collect(Collectors.toList());
-        return userModels;
-    }
-
+    /*
+     * jpa查询接口用(分页)
+     */
     public Page<UserModel> getPages (Pageable pageable){
 
-        Page<TbUser> tbUsers = userResponse.findAll(pageable);
+        // 数据查询
+        Page<TbUser> tbUsers = userJpaResponse.findAll(pageable);
 
+        // 返回类型转换
         Page<UserModel> users = tbUsers.map(new Function<TbUser, UserModel>() {
             @Override
             public UserModel apply(TbUser tbUser) {
@@ -72,7 +63,6 @@ public class UserService {
                 return userModel;
             }
         });
-
         return users;
     }
 }

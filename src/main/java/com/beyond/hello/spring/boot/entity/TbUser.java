@@ -3,6 +3,15 @@ package com.beyond.hello.spring.boot.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+/*
+ *
+ * mybatis逆行生成的实体
+ * 属性要与表一致
+ * 因为JPA也使用，所以必须加上@Entity和@Table两个注解
+ * 对应表中是主键的属性，要加@Id等的注解
+ * 因为JPA使用，所以实体中必须要有无参数的构造函数函数，否则启动报错
+ *
+ */
 @Entity
 @Table(schema ="wangzuo",name="tb_user")
 public class TbUser {

@@ -1,7 +1,8 @@
 package com.beyond.hello.spring.boot.model;
 
-import java.util.Date;
-
+/*
+ * 返回页面用数据的实体
+ */
 public class UserModel {
     private Integer id;
 
