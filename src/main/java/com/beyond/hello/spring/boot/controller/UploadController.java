@@ -24,11 +24,17 @@ public class UploadController {
     @PostMapping("/upload-csv-file")
     public String uploadCSVFile(@RequestParam("file") MultipartFile file, Model model) {
 
-        // validate file
+        // 画面没传文件，或者文件内容为空
         if (file.isEmpty()) {
             model.addAttribute("message", "not file");
             model.addAttribute("status", false);
         } else {
+            // 获取文件名
+            String fileName = file.getOriginalFilename();
+            System.out.println(fileName);
+            // 获取文件的后缀名
+            String suffixName = fileName.substring(fileName.lastIndexOf("."));
+            System.out.println("上传的后缀名为：" + suffixName);
 
             // parse CSV file to create a list of `User` objects
             try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {

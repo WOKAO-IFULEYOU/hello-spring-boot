@@ -16,6 +16,7 @@ public class SpringConfig implements WebMvcConfigurer {
         registry.addViewController("/top").setViewName("top");
         registry.addViewController("/file-upload-status").setViewName("file-upload-status");
         registry.addViewController("/ajax-test").setViewName("ajax-test");
+        registry.addViewController("/download").setViewName("download");
 
     }
 }
