@@ -25,11 +25,13 @@ public class UploadController {
     @PostMapping("/upload-csv-file")
     public String uploadCSVFile(@RequestParam("file") MultipartFile file, Model model) {
 
-        if(StringUtils.isEmpty(file.getOriginalFilename())){
+        if (StringUtils.isEmpty(file.getOriginalFilename())) {
             System.out.println("file null");
         }
 
-        System.out.println(file.getSize());
+        if (file.getSize() == 0) {
+            System.out.println(file.getSize());
+        }
 
         // 画面没传文件，或者文件内容为空
         if (file.isEmpty()) {
@@ -59,7 +61,7 @@ public class UploadController {
 
                 List<UserModel> users = userService.getUser(inputIds);
 
-                if(CollectionUtils.isEmpty(users)) {
+                if (CollectionUtils.isEmpty(users)) {
                     // save users list on model
                     model.addAttribute("message", "upload stop");
                     model.addAttribute("status", false);
