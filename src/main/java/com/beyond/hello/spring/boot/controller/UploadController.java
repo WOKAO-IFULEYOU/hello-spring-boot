@@ -25,12 +25,14 @@ public class UploadController {
     @PostMapping("/upload-csv-file")
     public String uploadCSVFile(@RequestParam("file") MultipartFile file, Model model) {
 
+        // 未上传文件
         if (StringUtils.isEmpty(file.getOriginalFilename())) {
             System.out.println("file null");
         }
 
+        // 上传空文件
         if (file.getSize() == 0) {
-            System.out.println(file.getSize());
+            System.out.println("空文件，size:" + file.getSize());
         }
 
         // 画面没传文件，或者文件内容为空
