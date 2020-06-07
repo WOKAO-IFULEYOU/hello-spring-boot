@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 
 import java.io.*;
 import java.util.List;
@@ -23,6 +24,12 @@ public class UploadController {
 
     @PostMapping("/upload-csv-file")
     public String uploadCSVFile(@RequestParam("file") MultipartFile file, Model model) {
+
+        if(StringUtils.isEmpty(file.getOriginalFilename())){
+            System.out.println("file null");
+        }
+
+        System.out.println(file.getSize());
 
         // 画面没传文件，或者文件内容为空
         if (file.isEmpty()) {
